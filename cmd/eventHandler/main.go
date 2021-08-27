@@ -1,6 +1,5 @@
-//gcp helloworld example
-
-package eventHandler
+// Package p contains a Pub/Sub Cloud Function.
+package p
 
 import (
 	"context"
@@ -10,7 +9,6 @@ import (
 
 	"cloud.google.com/go/pubsub"
 	"github.com/cloudevents/sdk-go/v2/event"
-	"github.com/utkarsh-extc/gcpStepEventHandler/internal"
 )
 
 // MessagePublishedData contains the full Pub/Sub message
@@ -45,20 +43,26 @@ func Eventhandler(ctx context.Context, e event.Event) error {
 		return fmt.Errorf("event.DataAs: %v", err)
 	}
 
-	name := string(msg.Message.Data) // Automatically decoded from base64.
-	switch name {
-	case internal.Step1Message:
-		topic := c.Topic(internal.Step2Topic)
-		res := topic.Publish(ctx, &pubsub.Message{Data: []byte(internal.Step2Message)})
+	msgBlob := string(msg.Message.Data) // Automatically decoded from base64.
+
+	log.Printf("%s received by event handler", msgBlob)
+	return EventRouter(ctx,msgBlob)
+}
+
+func EventRouter(ctx context.Context,msgBlob string)error{
+	switch msgBlob {
+	case Step1Message:
+		topic := c.Topic(Step2Topic)
+		res := topic.Publish(ctx, &pubsub.Message{Data: []byte(Step2Message)})
 		id, e := res.Get(ctx)
 		if e != nil {
 			log.Println("err while creating pubsub client", e.Error())
 			return e
 		}
 		log.Println("message publish on Step2Topic", id)
-	case internal.Step2Message:
-		topic := c.Topic(internal.Step3Topic)
-		res := topic.Publish(ctx, &pubsub.Message{Data: []byte(internal.Step3Message)})
+	case Step2Message:
+		topic := c.Topic(Step3Topic)
+		res := topic.Publish(ctx, &pubsub.Message{Data: []byte(Step3Message)})
 		id, e := res.Get(ctx)
 		if e != nil {
 			log.Println("err while creating pubsub client", e.Error())
@@ -67,8 +71,8 @@ func Eventhandler(ctx context.Context, e event.Event) error {
 		log.Println("message publish on Step3Topic", id)
 
 	default:
-		log.Printf("%s received, but not handled", name)
+		log.Printf("%s received, but not handled", msgBlob)
 	}
-	log.Printf("%s received by event handler", name)
+
 	return nil
 }

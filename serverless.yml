@@ -11,8 +11,8 @@ package:
 provider:
   name: google
   runtime: go113
-  project: stepProjectName
-  credentials: slsframework.json
+  project: stepProjectName  #TODO
+  credentials: slsframework.json #TODO
   labels:
     app-type: tobedeleted
 
@@ -20,7 +20,7 @@ plugins:
   - serverless-google-cloudfunctions
 
 functions:
-  stepsHandler:
+  step1Handler:
     handler: Eventhandler
     environment: 
       PROJECT_ID: ${self:provider.project}
@@ -31,12 +31,36 @@ functions:
       - event:
           eventType: providers/cloud.pubsub/eventTypes/topic.publish
           resource: 'projects/${self:provider.project, ""}/topics/step1-topic'
+  step2Handler:
+    handler: Eventhandler
+    environment: 
+      PROJECT_ID: ${self:provider.project}
+    package:
+      include:
+        - ./cmd/eventHandler/Eventhandler
+    events:
       - event:
           eventType: providers/cloud.pubsub/eventTypes/topic.publish
           resource: 'projects/${self:provider.project, ""}/topics/step2-topic'
+  step3Handler:
+    handler: Eventhandler
+    environment: 
+      PROJECT_ID: ${self:provider.project}
+    package:
+      include:
+        - ./cmd/eventHandler/Eventhandler
+    events:      
       - event:
           eventType: providers/cloud.pubsub/eventTypes/topic.publish
           resource: 'projects/${self:provider.project, ""}/topics/step3-topic'
+  step4Handler:
+    handler: Eventhandler
+    environment: 
+      PROJECT_ID: ${self:provider.project}
+    package:
+      include:
+        - ./cmd/eventHandler/Eventhandler
+    events:
       - event:
           eventType: providers/cloud.pubsub/eventTypes/topic.publish
           resource: 'projects/${self:provider.project, ""}/topics/step4-topic'

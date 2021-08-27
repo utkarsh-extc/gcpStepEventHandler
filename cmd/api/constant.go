@@ -1,4 +1,4 @@
-package internal
+package p
 
 const (
 	Step1Topic = "step1-topic"

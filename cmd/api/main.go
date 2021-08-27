@@ -1,4 +1,4 @@
-package api
+package p
 
 import (
 	"context"
@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"cloud.google.com/go/pubsub"
-	"github.com/utkarsh-extc/gcpStepEventHandler/internal"
 )
 
 func Send(w http.ResponseWriter, r *http.Request) {
@@ -19,9 +18,9 @@ func Send(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	topic := c.Topic(internal.Step1Topic)
+	topic := c.Topic(Step1Topic)
 
-	res := topic.Publish(ctx, &pubsub.Message{Data: []byte(internal.Step1Message)})
+	res := topic.Publish(ctx, &pubsub.Message{Data: []byte(Step1Message)})
 
 	id, e := res.Get(ctx)
 	if e != nil {
