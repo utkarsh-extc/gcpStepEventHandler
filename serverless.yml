@@ -1,0 +1,52 @@
+service: gcp-StepEventService
+
+frameworkVersion: ">=1.33.0 <2.0.0"
+
+package:
+  individually: true
+  excludeDevDependencies: false
+  exclude:
+    - ./**
+
+provider:
+  name: google
+  runtime: go113
+  project: stepProjectName
+  credentials: slsframework.json
+  labels:
+    app-type: tobedeleted
+
+plugins:
+  - serverless-google-cloudfunctions
+
+functions:
+  stepsHandler:
+    handler: Eventhandler
+    environment: 
+      PROJECT_ID: ${self:provider.project}
+    package:
+      include:
+        - ./cmd/eventHandler/Eventhandler
+    events:
+      - event:
+          eventType: providers/cloud.pubsub/eventTypes/topic.publish
+          resource: 'projects/${self:provider.project, ""}/topics/step1-topic'
+      - event:
+          eventType: providers/cloud.pubsub/eventTypes/topic.publish
+          resource: 'projects/${self:provider.project, ""}/topics/step2-topic'
+      - event:
+          eventType: providers/cloud.pubsub/eventTypes/topic.publish
+          resource: 'projects/${self:provider.project, ""}/topics/step3-topic'
+      - event:
+          eventType: providers/cloud.pubsub/eventTypes/topic.publish
+          resource: 'projects/${self:provider.project, ""}/topics/step4-topic'
+  
+  stepsTrigger:
+    handler: Send
+    environment: 
+      PROJECT_ID: ${self:provider.project}
+    package:
+      include:
+        - ./cmd/api/Send
+    events:
+      - http: path
