@@ -1,9 +1,9 @@
 clean:
-	rm -rf src/.serverless
+	rm -rf src\.serverless
 
 deploy: clean build
-	serverless deploy
+	serverless deploy -c src\serverless.yml
 
 remove: clean
-	serverless remove
-	rm -rf src/.serverless
+	serverless remove -c src\serverless.yml
+	rm -rf src\.serverless
