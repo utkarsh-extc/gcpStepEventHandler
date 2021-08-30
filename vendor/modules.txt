@@ -13,22 +13,10 @@ cloud.google.com/go/pubsub/internal/distribution
 cloud.google.com/go/pubsub/internal/scheduler
 # github.com/aws/aws-lambda-go v1.26.0
 ## explicit
-github.com/aws/aws-lambda-go/events
-github.com/aws/aws-lambda-go/lambda
-github.com/aws/aws-lambda-go/lambda/handlertrace
-github.com/aws/aws-lambda-go/lambda/messages
-github.com/aws/aws-lambda-go/lambdacontext
 # github.com/cloudevents/sdk-go/v2 v2.5.0
 ## explicit
-github.com/cloudevents/sdk-go/v2/event
-github.com/cloudevents/sdk-go/v2/event/datacodec
-github.com/cloudevents/sdk-go/v2/event/datacodec/json
-github.com/cloudevents/sdk-go/v2/event/datacodec/text
-github.com/cloudevents/sdk-go/v2/event/datacodec/xml
-github.com/cloudevents/sdk-go/v2/types
 # github.com/fnproject/fdk-go v0.0.8
 ## explicit
-github.com/fnproject/fdk-go
 # github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da
 ## explicit
 github.com/golang/groupcache/lru
@@ -44,6 +32,9 @@ github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
 github.com/google/go-cmp/cmp/internal/function
 github.com/google/go-cmp/cmp/internal/value
+# github.com/google/uuid v1.3.0
+## explicit
+github.com/google/uuid
 # github.com/googleapis/gax-go/v2 v2.1.0
 ## explicit
 github.com/googleapis/gax-go/v2
@@ -51,18 +42,12 @@ github.com/googleapis/gax-go/v2/apierror
 github.com/googleapis/gax-go/v2/apierror/internal/proto
 # github.com/json-iterator/go v1.1.11
 ## explicit
-github.com/json-iterator/go
 # github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
 ## explicit
-github.com/modern-go/concurrent
 # github.com/modern-go/reflect2 v1.0.1
 ## explicit
-github.com/modern-go/reflect2
 # github.com/tencentyun/scf-go-lib v0.0.0-20200624065115-ba679e2ec9c9
 ## explicit
-github.com/tencentyun/scf-go-lib/cloudfunction
-github.com/tencentyun/scf-go-lib/cloudfunction/messages
-github.com/tencentyun/scf-go-lib/functioncontext
 # go.opencensus.io v0.23.0
 go.opencensus.io
 go.opencensus.io/internal
