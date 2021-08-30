@@ -1,3 +1,5 @@
+setup:
+	export GOOGLE_APPLICATION_CREDENTIALS=C:\Users\uvednara\Documents\playground\gcpCreds\gcpstep-cred.json
 clean:
 	rm -rf src\.serverless
 

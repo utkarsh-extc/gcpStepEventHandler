@@ -11,8 +11,8 @@ package:
 provider:
   name: google
   runtime: go113
-  project: stepProjectName  #TODO
-  credentials: slsframework.json #TODO
+  project: gcpStep
+  credentials: C:\Users\uvednara\Documents\playground\gcpCreds\gcpstep-cred.json
   timeout: 20s
 
 plugins:

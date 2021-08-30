@@ -43,7 +43,7 @@ func Eventhandler(ctx context.Context, m PubSubMessage) error {
 
 	msg := m.UnMarshallEvent()
 
-	log.Printf("%s received by event handler", msg)
+	log.Printf("%s received by event handler", m)
 	return EventRouter(ctx, msg)
 }
 
@@ -86,7 +86,7 @@ func EventRouter(ctx context.Context, msg MyCloudEvent) error {
 		}
 		log.Println("message publish on Step3Topic", id)
 	case Step4MessageType:
-		log.Println("msg recived of type", Step4MessageType, "has", msg.MashallEvent())
+		log.Println("msg recived of type", Step4MessageType, "has", string(msg.MashallEvent()))
 
 	default:
 		log.Printf("%s received, but not handled", msg)
