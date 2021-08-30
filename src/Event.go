@@ -73,6 +73,20 @@ func EventRouter(ctx context.Context, msg MyCloudEvent) error {
 			return e
 		}
 		log.Println("message publish on Step3Topic", id)
+	case Step3MessageType:
+		topic := c.Topic(Step4Topic)
+		// use same correlationID
+		msg.Type = Step4MessageType
+		msg.Data = "Step4MessagePayload"
+		res := topic.Publish(ctx, &pubsub.Message{Data: msg.MashallEvent()})
+		id, e := res.Get(ctx)
+		if e != nil {
+			log.Println("err while creating pubsub client", e.Error())
+			return e
+		}
+		log.Println("message publish on Step3Topic", id)
+	case Step4MessageType:
+		log.Println("msg recived of type", Step4MessageType, "has", msg.MashallEvent())
 
 	default:
 		log.Printf("%s received, but not handled", msg)
